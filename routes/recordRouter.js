@@ -17,6 +17,7 @@ router.post('/startRecord', function(req, res, next) {
       res.status(500).json(err);
     }
     else {
+      console.log(xvfb);
       res.status(200).json({message:"started",res:xvfb});
       setTimeout(()=>{
         xvfb.stop(function (err) {
