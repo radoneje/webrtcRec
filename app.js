@@ -6,7 +6,7 @@ var lessMiddleware = require('less-middleware');
 var logger = require('morgan');
 var bodyParser = require('body-parser')
 
-var terms=[];
+var terms={};
 
 var recordRouter = require('./routes/recordRouter');
 

@@ -4,7 +4,11 @@ var Xvfb = require('xvfb');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.json({staus:get, term:req.terms});
+  var arr=[];
+  for(var key in req.terms){
+    arr.push(key);
+  }
+  res.json({staus:get, terms:arr });
 
 
 });
@@ -18,17 +22,25 @@ router.post('/startRecord', function(req, res, next) {
     }
     else {
       console.log(xvfb);
-
-
-      setTimeout(()=>{
-        xvfb.stop(function (err) {
-          res.status(200).json({message:"started",res:xvfb._display});
-          console.log("Xvfb server stopped ", err);
-        });
-      },2*1000);
+      res.terms["d_"+xvfb._display]=xvfb;
+      res.status(200).json({message:"started",res:xvfb._display});
     }
   });
 });
+router.post('/stopRecord', function(req, res, next) {
+
+  if(! req.terms["d_"+req.body.id])
+    return res.status(404).json({status:-1})
+
+  req.terms["d_"+req.body.id].stop(function (err) {
+      if(err){
+        console.warn(err);
+        return res.status(500).json({status:-1, message:err})
+      }
+      res.status(200).json({status:1})
+      console.log("Xvfb server stopped ", err);
+    });
+})
 
 module.exports = router;
 
