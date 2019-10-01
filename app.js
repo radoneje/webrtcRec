@@ -32,9 +32,9 @@ app.use(function(req, res, next) {
 
 
 app.use('/recordcontrol', recordRouter);
-app.use("/", function(req, res, next) {
+/*app.use("/", function(req, res, next) {
   res.json({status:1});
-});
+});*/
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
