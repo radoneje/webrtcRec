@@ -4,10 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var lessMiddleware = require('less-middleware');
 var logger = require('morgan');
-var Xvfb = require('xvfb');
+var bodyParser = require('body-parser')
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var terms=[];
+
+var recordRouter = require('./routes/recordRouter');
 
 var app = express();
 
@@ -21,9 +22,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({ extended: false })) // parse application/x-www-form-urlencoded
+app.use(bodyParser.json()) // parse application/json
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use(function(req, res, next) {
+  res.terms=terms;
+  next();
+});
+
+
+app.use('/recordControl', recordRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -43,21 +51,6 @@ app.use(function(err, req, res) {
 
 app.listen(8082, ()=>{
   console.log("server ready on port 8082");
-  var xvfb = new Xvfb();
-  xvfb.start(function(err, xvfbProcess) {
-    if(err)
-      console.warn(err);
-    else {
-      console.log("Xvfb server started");
-      setTimeout(()=>{
-        xvfb.stop(function (err) {
-          console.log("Xvfb server stopped ", err);
-        });
-      },10*1000);
-
-    }
-  });
-
 });
 
 
