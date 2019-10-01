@@ -51,7 +51,7 @@ app.listen(8082, ()=>{
       console.log("Xvfb server started");
       setTimeout(()=>{
         xvfb.stop(function (err) {
-          console.log("Xvfb server stopped", err);
+          console.log("Xvfb server stopped ", err);
         });
       },10*1000);
 
