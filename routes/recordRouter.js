@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
   for(var key in req.terms){
     arr.push(key);
   }
-  res.json({staus:get, terms:arr });
+  res.json({staus:1, terms:arr });
 
 
 });
