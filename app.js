@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({ extended: false })) // parse application/x-www-f
 app.use(bodyParser.json()) // parse application/json
 
 
-app.use('/recordcontrol', (req, res, next)=>{res.terms=terms; recordRouter(req, res, next)});
+app.use('/recordcontrol', (req, res, next)=>{req.terms=terms; recordRouter(req, res, next)});
 
 
 // catch 404 and forward to error handler
