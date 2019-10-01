@@ -31,7 +31,7 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function(err, req, res) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -51,7 +51,7 @@ app.listen(8082, ()=>{
       console.log("Xvfb server started");
       setTimeout(()=>{
         xvfb.stop(function (err) {
-          console.log("Xvfb server stopped 4");
+          console.log("Xvfb server stopped", err);
         });
       },10*1000);
 
