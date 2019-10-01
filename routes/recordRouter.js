@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/startRecord', function(req, res, next) {
-  var displayNum=parseInt((math.random()*900+100));
+  var displayNum=parseInt((Math.random()*900+100));
   var xvfb = new Xvfb({
     displayNum:displayNum,//the X display to use, defaults to the lowest unused display number >= 99 if reuse is false or 99 if reuse is true.
     reuse:false, // whether to reuse an existing Xvfb instance if it already exists on the X display referenced by displayNum.
