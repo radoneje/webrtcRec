@@ -40,4 +40,9 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+server.listen(8082, ()=>{
+  console.log("server ready");
+});
+
+
 module.exports = app;
