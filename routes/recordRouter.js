@@ -28,6 +28,7 @@ router.post('/startRecord', function(req, res, next) {
 });
 router.post('/stopRecord', function(req, res, next) {
 
+  console.log(req.body.id);
   if(! req.terms["d_"+req.body.id])
     return res.status(404).json({status:-1})
 
