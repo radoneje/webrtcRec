@@ -13,7 +13,14 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/startRecord', function(req, res, next) {
-  var xvfb = new Xvfb();
+  var displayNum=parseInt((math.random()*900+100));
+  var xvfb = new Xvfb({
+    displayNum:displayNum,//the X display to use, defaults to the lowest unused display number >= 99 if reuse is false or 99 if reuse is true.
+    reuse:false, // whether to reuse an existing Xvfb instance if it already exists on the X display referenced by displayNum.
+    timeout:500, //number of milliseconds to wait when starting Xvfb before assuming it failed to start, defaults to 500.
+    silent:false,//don't pipe Xvfb stderr to the process's stderr.
+    xvfb_args:" -screen 0 1600x1200x24+32"//xvfb_args
+  });
   xvfb.start(function(err, xvfbProcess) {
     if(err) {
       console.warn(err);
