@@ -21,8 +21,9 @@ router.post('/startRecord', function(req, res, next) {
     }
     else {
       console.log(xvfb);
-      req.terms["d_"+xvfb._display]=xvfb;
-      res.status(200).json({message:"started",res:xvfb._display});
+      var id="d_"+xvfb._display.replace(":","");
+      req.terms[id]=xvfb;
+      res.status(200).json({message:"started",id:id});
     }
   });
 });
