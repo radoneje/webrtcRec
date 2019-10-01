@@ -21,7 +21,7 @@ router.post('/startRecord', function(req, res, next) {
     }
     else {
       console.log(xvfb);
-      res.terms["d_"+xvfb._display]=xvfb;
+      req.terms["d_"+xvfb._display]=xvfb;
       res.status(200).json({message:"started",res:xvfb._display});
     }
   });
