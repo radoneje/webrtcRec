@@ -10,7 +10,6 @@ router.get('/', function(req, res, next) {
   }
   res.json({staus:1, terms:arr });
 
-
 });
 
 router.post('/startRecord', function(req, res, next) {

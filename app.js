@@ -25,16 +25,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false })) // parse application/x-www-form-urlencoded
 app.use(bodyParser.json()) // parse application/json
 
-app.use(function(req, res, next) {
-  res.terms=terms;
-  next();
-});
 
+app.use('/recordcontrol', (req, res, next)=>{res.terms=terms; recordRouter(req, res, next)});
 
-app.use('/recordcontrol', recordRouter);
-/*app.use("/", function(req, res, next) {
-  res.json({status:1});
-});*/
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
