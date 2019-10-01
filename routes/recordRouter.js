@@ -31,6 +31,12 @@ router.post('/stopRecord', function(req, res, next) {
   console.log(req.body.id);
  /* if(! req.terms["d_"+req.body.id])
     return res.status(404).json({status:-1})*/
+  var arr=[];
+  for(var key in req.terms){
+    arr.push(key);
+  }
+  res.json({staus:1, terms:arr, id:"d_"+req.body.id });
+  return;
 
   req.terms["d_"+req.body.id].stop(function (err) {
       if(err){
