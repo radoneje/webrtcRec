@@ -19,7 +19,7 @@ router.post('/startRecord', function(req, res, next) {
     reuse:false, // whether to reuse an existing Xvfb instance if it already exists on the X display referenced by displayNum.
     timeout:500, //number of milliseconds to wait when starting Xvfb before assuming it failed to start, defaults to 500.
     silent:false,//don't pipe Xvfb stderr to the process's stderr.
-    xvfb_args:['-screen', '0', '2880x1800x24']//xvfb_args
+    xvfb_args:['-screen', '0', '2880x1800x24+32']//xvfb_args
   });
   xvfb.start(function(err, xvfbProcess) {
     if(err) {
