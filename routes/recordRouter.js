@@ -19,6 +19,7 @@ router.post('/startRecord', function(req, res, next) {
     else {
       console.log(xvfb);
       res.status(200).json({message:"started",res:xvfb._display});
+
       setTimeout(()=>{
         xvfb.stop(function (err) {
           console.log("Xvfb server stopped ", err);
@@ -26,7 +27,6 @@ router.post('/startRecord', function(req, res, next) {
       },2*1000);
     }
   });
-  res.json(req.terms)
 });
 
 module.exports = router;
