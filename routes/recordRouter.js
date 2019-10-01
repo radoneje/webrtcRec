@@ -4,7 +4,7 @@ var Xvfb = require('xvfb');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.json(req.terms);
+  res.json({staus:get, term:req.terms});
 
 
 });
@@ -17,12 +17,12 @@ router.post('/startRecord', function(req, res, next) {
       res.status(500).json(err);
     }
     else {
-      res.status(200).json(xvfb);
+      res.status(200).json({message:"started",res:xvfb});
       setTimeout(()=>{
         xvfb.stop(function (err) {
           console.log("Xvfb server stopped ", err);
         });
-      },10*1000);
+      },2*1000);
     }
   });
   res.json(req.terms)
