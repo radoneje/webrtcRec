@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var lessMiddleware = require('less-middleware');
 var logger = require('morgan');
+var Xvfb = require('xvfb');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -42,6 +43,21 @@ app.use(function(err, req, res, next) {
 
 app.listen(8082, ()=>{
   console.log("server ready on port 8082");
+  var xvfb = new Xvfb();
+  xvfb.start(function(err, xvfbProcess) {
+    if(err)
+      console.warn(err);
+    else {
+      console.log("Xvfb server started");
+      setTimeout(()=>{
+        xvfb.stop(function (err) {
+          console.log("Xvfb server stopped");
+        });
+      },10*1000);
+
+    }
+  });
+
 });
 
 
